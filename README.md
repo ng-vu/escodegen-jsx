@@ -1,5 +1,5 @@
 ## Escodegen with JSX
-[![npm version](https://badge.fury.io/js/escodegen.svg)](http://badge.fury.io/js/escodegen)
+[![npm version](https://badge.fury.io/js/escodegen-jsx.svg)](http://badge.fury.io/js/escodegen-jsx)
 [![Build Status](https://secure.travis-ci.org/estools/escodegen.svg)](http://travis-ci.org/estools/escodegen)
 [![Dependency Status](https://david-dm.org/estools/escodegen.svg)](https://david-dm.org/estools/escodegen)
 [![devDependency Status](https://david-dm.org/estools/escodegen/dev-status.svg)](https://david-dm.org/estools/escodegen#info=devDependencies)
