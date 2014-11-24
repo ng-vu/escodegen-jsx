@@ -30,27 +30,23 @@ a(<div><span/></div>, 0);
 a(
     <div>
         <a><span/></a>
-    </div>
-);
+    </div>);
 a(0, 
     <div>
         <a><span/></a>
-    </div>
-, 0);
+    </div>, 0);
 a(
     <div>
         <ul>
             <li><a></a></li>
         </ul>
-    </div>
-);
+    </div>);
 a(0, 
     <div>
         <ul>
             <li><a></a></li>
         </ul>
-    </div>
-, 0);
+    </div>, 0);
 a = <div></div>;
 a = [<div></div>];
 a = [
