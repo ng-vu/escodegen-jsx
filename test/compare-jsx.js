@@ -31,7 +31,7 @@ function test(code, expected) {
 describe('compare-jsx test', function () {
     fs.readdirSync(__dirname + '/compare-jsx').sort().forEach(function(file) {
         var code, expected, p;
-        if (/element-statement\.jsx$/.test(file) && !/expected\.jsx$/.test(file)) {
+        if (/\.jsx$/.test(file) && !/expected\.jsx$/.test(file)) {
             it(file, function () {
                 p = file.replace(/\.jsx$/, '.expected.jsx');
                 code = fs.readFileSync(__dirname + '/compare-jsx/' + file, 'utf-8');
