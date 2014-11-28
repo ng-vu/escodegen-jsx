@@ -23,8 +23,6 @@ function test(code, expected) {
 
     // for UNIX text comment
     actual = escodegen.generate(tree).replace(/[\n\r]$/, '') + '\n';
-    fs.writeFileSync(__dirname + '/../../__tmp/__tree.json', JSON.stringify(tree, '', '  '));
-    fs.writeFileSync(__dirname + '/../../__tmp/__actual.jsx', actual);
     expect(actual).to.be.equal(expected);
 }
 
