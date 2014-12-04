@@ -2453,8 +2453,12 @@
         // Attach newlines
 
         if (stmt.trailingNewlines > 1) {
-            result.push(newline);
-            result.push(newline);
+            if (result.push) {
+                result.push(newline);
+                result.push(newline);
+            } else {
+                result = [ result.toString(), newline, newline ];
+            }
         }
 
         // Attach comments
