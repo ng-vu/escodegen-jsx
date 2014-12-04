@@ -2450,6 +2450,13 @@
 
         result = this[stmt.type](stmt, flags);
 
+        // Attach newlines
+
+        if (stmt.trailingNewlines > 1) {
+            result.push(newline);
+            result.push(newline);
+        }
+
         // Attach comments
 
         if (extra.comment) {

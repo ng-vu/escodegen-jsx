@@ -33,6 +33,7 @@
     "source-map": "~0.1.40"
   },
   "devDependencies": {
+    "estraverse-newline": "git://github.com/ng-vu/estraverse-newline.git#next",
     "esprima-moz": "*",
     "semver": "^4.1.0",
     "bluebird": "^2.3.11",
