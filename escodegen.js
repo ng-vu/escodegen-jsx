@@ -2452,7 +2452,7 @@
 
         // Attach newlines
 
-        if (stmt.trailingNewlines > 1) {
+        if (stmt !== Syntax.BlockStatement && stmt.trailingNewlines > 1) {
             if (result.push) {
                 result.push(newline);
                 result.push(newline);
