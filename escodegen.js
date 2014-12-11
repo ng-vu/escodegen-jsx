@@ -2113,6 +2113,10 @@
                 return 'null';
             }
 
+            if (typeof expr.value === 'string' && expr.hasOwnProperty('raw')) {
+                return expr.raw;
+            }
+
             if (typeof expr.value === 'string') {
                 return escapeString(expr.value);
             }
