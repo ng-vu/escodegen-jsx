@@ -2303,7 +2303,8 @@
                     fragment = that.generateExpression(expr.children[i], Precedence.XJSElement, E_TTF | F_XJS_NOINDENT);
 
                     xjsFragments.push(fragment);
-                    multiline = multiline || xjsHasNode(expr.children[i]);
+                    // multiline = multiline || xjsHasNode(expr.children[i]);
+                    multiline = true;
                 }
 
                 multiline = multiline || xjsFragments.length > 1 ||
