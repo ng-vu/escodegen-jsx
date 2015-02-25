@@ -2260,6 +2260,20 @@
             return result;
         },
 
+        XJSSpreadAttribute: function (expr, precedence, flags) {
+            var result = ['{...'];
+
+            var fragment = this.generateExpression(expr.argument, Precedence.Sequence, {
+                allowIn: true,
+                allowCall: true
+            });
+
+            result.push(fragment);
+            result.push('}');
+
+            return result;
+        },
+
         XJSClosingElement: function (expr, precedence, flags) {
             return [
                 '</',
@@ -2382,7 +2396,6 @@
                 fragment = that.generateExpression(expr.attributes[i], Precedence.Sequence, E_TTF);
                 xjsFragments.push({
                     expr: expr.attributes[i],
-                    name: expr.attributes[i].name.name,
                     fragment: fragment,
                     multiline: hasLineTerminator(toSourceNodeWhenNeeded(fragment).toString())
                 });
@@ -2391,19 +2404,6 @@
                     xjsFragments[xjsFragments.length - 1].multiline = true;
                 }
             }
-
-            xjsFragments.sort(function(a, b) {
-                if (!a.multiline && !b.multiline) {
-                    return a.name > b.name ? 1 : -1;
-                }
-                if (!a.multiline) {
-                    return -1;
-                }
-                if (!b.multiline) {
-                    return 1;
-                }
-                return a.name > b.name ? 1 : -1;
-            });
 
             withIndent(function(indent) {
                 for (var i = 0, len = xjsFragments.length; i < len; ++i) {

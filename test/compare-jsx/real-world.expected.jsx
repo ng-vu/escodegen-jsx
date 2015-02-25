@@ -1,9 +1,10 @@
 function a() {
     var _this = this;
     return (
-        <div a='a' e
+        <div a='a'
             b={b}
             c={c + d}
+            e
             f={_this.onclick(function (e) {
                 var x = 'x';
                 return <this.props.component/>;

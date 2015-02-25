@@ -9,8 +9,9 @@ function a() {
 }
 function a() {
     return (
-        <div a='a' b='b' d='d'
-            c={c}/>
+        <div a='a' b='b'
+            c={c}
+            d='d'/>
     );
 }
 function a() {

@@ -1,13 +1,19 @@
 <div>
     <div a='a'></div>
-    <div a='a' b c={c() * 2}>text</div>
-    <div a='a' b d
-        c={c() * 2}>
+    <div a='a' c={c() * 2} b>text</div>
+    <div a='a'
+        c={c() * 2} {...c}
+        b>
         text
     </div>
-    <div a='a' b c="'c'"
-        d='d' e='e' f
-        g>
+    <div a='a'
+        c={c() * 2} {...c}
+        b {...(c()) * 2} d>
+        text
+    </div>
+    <div a='a' b e='e'
+        f d='d' g
+        c="'c'">
         text
     </div>
     <div a='a' b
@@ -17,12 +23,13 @@
         })}>
         text
     </div>
-    <div a='a' b
+    <div
         c={c() * 2}
+        e={{ e: 'e' }} {...(c()) * 2}
+        a='a'
         d={d(function () {
             return d;
-        })}
-        e={{ e: 'e' }}
+        })} b
         f={{
             e: 'e',
             f: 'f'
