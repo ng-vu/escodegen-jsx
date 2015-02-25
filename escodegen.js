@@ -1128,7 +1128,7 @@
 
             // export default HoistableDeclaration[Default]
             // export default AssignmentExpression[In] ;
-            if (stmt['default']) {
+            if (stmt.default) {
                 result = join(result, 'default');
                 if (isStatement(stmt.declaration)) {
                     result = join(result, this.generateStatement(stmt.declaration, bodyFlags));
@@ -1699,8 +1699,8 @@
             // F_ALLOW_UNPARATH_NEW becomes false.
             result = [this.generateExpression(expr.callee, Precedence.Call, E_TTF)];
             result.push('(');
-            for (i = 0, iz = expr['arguments'].length; i < iz; ++i) {
-                result.push(this.generateExpression(expr['arguments'][i], Precedence.Assignment, E_TTT | F_XJS_NOPAREN));
+            for (i = 0, iz = expr.arguments.length; i < iz; ++i) {
+                result.push(this.generateExpression(expr.arguments[i], Precedence.Assignment, E_TTT | F_XJS_NOPAREN));
                 if (i + 1 < iz) {
                     result.push(',' + space);
                 }
@@ -1715,7 +1715,7 @@
 
         NewExpression: function (expr, precedence, flags) {
             var result, length, i, iz, itemFlags;
-            length = expr['arguments'].length;
+            length = expr.arguments.length;
 
             // F_ALLOW_CALL becomes false.
             // F_ALLOW_UNPARATH_NEW may become false.
@@ -1729,7 +1729,7 @@
             if (!(flags & F_ALLOW_UNPARATH_NEW) || parentheses || length > 0) {
                 result.push('(');
                 for (i = 0, iz = length; i < iz; ++i) {
-                    result.push(this.generateExpression(expr['arguments'][i], Precedence.Assignment, E_TTT));
+                    result.push(this.generateExpression(expr.arguments[i], Precedence.Assignment, E_TTT));
                     if (i + 1 < iz) {
                         result.push(',' + space);
                     }
@@ -1913,7 +1913,7 @@
 
         MethodDefinition: function (expr, precedence, flags) {
             var result, fragment;
-            if (expr['static']) {
+            if (expr.static) {
                 result = ['static' + space];
             } else {
                 result = [];
@@ -2260,6 +2260,20 @@
             return result;
         },
 
+        XJSSpreadAttribute: function (expr, precedence, flags) {
+            var result = ['{...'];
+
+            var fragment = this.generateExpression(expr.argument, Precedence.Sequence, {
+                allowIn: true,
+                allowCall: true
+            });
+
+            result.push(fragment);
+            result.push('}');
+
+            return result;
+        },
+
         XJSClosingElement: function (expr, precedence, flags) {
             return [
                 '</',
@@ -2382,7 +2396,6 @@
                 fragment = that.generateExpression(expr.attributes[i], Precedence.Sequence, E_TTF);
                 xjsFragments.push({
                     expr: expr.attributes[i],
-                    name: expr.attributes[i].name.name,
                     fragment: fragment,
                     multiline: hasLineTerminator(toSourceNodeWhenNeeded(fragment).toString())
                 });
@@ -2391,19 +2404,6 @@
                     xjsFragments[xjsFragments.length - 1].multiline = true;
                 }
             }
-
-            xjsFragments.sort(function(a, b) {
-                if (!a.multiline && !b.multiline) {
-                    return a.name > b.name ? 1 : -1;
-                }
-                if (!a.multiline) {
-                    return -1;
-                }
-                if (!b.multiline) {
-                    return 1;
-                }
-                return a.name > b.name ? 1 : -1;
-            });
 
             withIndent(function(indent) {
                 for (var i = 0, len = xjsFragments.length; i < len; ++i) {
@@ -2439,7 +2439,7 @@
 
 
         if (extra.comment) {
-            result = addComments(expr,result);
+            result = addComments(expr, result);
         }
         return toSourceNodeWhenNeeded(result, expr);
     };
