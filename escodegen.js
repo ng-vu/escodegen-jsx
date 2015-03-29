@@ -2113,6 +2113,10 @@
                 return 'null';
             }
 
+            if (typeof expr.value === 'string' && expr.hasOwnProperty('raw')) {
+                return expr.raw;
+            }
+
             if (typeof expr.value === 'string') {
                 return escapeString(expr.value);
             }
@@ -2299,7 +2303,8 @@
                     fragment = that.generateExpression(expr.children[i], Precedence.XJSElement, E_TTF | F_XJS_NOINDENT);
 
                     xjsFragments.push(fragment);
-                    multiline = multiline || xjsHasNode(expr.children[i]);
+                    // multiline = multiline || xjsHasNode(expr.children[i]);
+                    multiline = true;
                 }
 
                 multiline = multiline || xjsFragments.length > 1 ||
@@ -2449,6 +2454,15 @@
             fragment;
 
         result = this[stmt.type](stmt, flags);
+
+        // Attach newlines
+
+        if (stmt.type !== Syntax.BlockStatement && stmt.trailingNewlines > 1) {
+            if (result.push) {
+                result.push(newline);
+                result.push(newline);
+            }
+        }
 
         // Attach comments
 

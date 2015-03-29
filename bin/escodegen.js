@@ -28,7 +28,7 @@
 var fs = require('fs'),
     path = require('path'),
     root = path.join(path.dirname(fs.realpathSync(__filename)), '..'),
-    esprima = require('esprima'),
+    esprima = require('esprima-fb'),
     escodegen = require(root),
     optionator = require('optionator')({
         prepend: 'Usage: escodegen [options] file...',
@@ -43,7 +43,7 @@ var fs = require('fs'),
     }),
     args = optionator.parse(process.argv),
     files = args._,
-    options,
+    options = {},
     esprimaOptions = {
         raw: true,
         tokens: true,

@@ -7,7 +7,7 @@
     "esgenerate": "./bin/esgenerate.js",
     "escodegen": "./bin/escodegen.js"
   },
-  "version": "0.1.0-1.4.2dev",
+  "version": "0.1.1-1.4.2dev",
   "engines": {
     "node": ">=0.10.0"
   },
@@ -33,6 +33,7 @@
     "source-map": "~0.1.40"
   },
   "devDependencies": {
+    "estraverse-newline": "git://github.com/ng-vu/estraverse-newline.git#next",
     "esprima-moz": "*",
     "semver": "^4.1.0",
     "bluebird": "^2.3.11",
